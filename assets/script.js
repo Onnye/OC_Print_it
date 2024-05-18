@@ -18,8 +18,11 @@ const slides = [
   },
 ];
 
+let currentIndex = 0;
+
 const leftArrow = document.querySelector(".arrow_left");
 const rightArrow = document.querySelector(".arrow_right");
+const dotsContainer = document.querySelector(".dots");
 
 leftArrow.addEventListener("click", () => {
   console.log("Left arrow clicked");
@@ -28,3 +31,16 @@ leftArrow.addEventListener("click", () => {
 rightArrow.addEventListener("click", () => {
   console.log("Right arrow clicked");
 });
+
+function createDots() {
+  for (let index = 0; index < slides.length; index++) {
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    if (index === currentIndex) {
+      dot.classList.add("dot_selected");
+    }
+    dotsContainer.appendChild(dot);
+  }
+}
+
+createDots();
