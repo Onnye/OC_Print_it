@@ -1,5 +1,4 @@
 // Tableau contenant les données des diapositives (image et texte)
-
 const slides = [
   {
     image: "slide1.jpg",
@@ -20,7 +19,6 @@ const slides = [
   },
 ];
 
-// Index courant de la diapositive affichée
 let currentIndex = 0;
 
 const leftArrow = document.querySelector(".arrow_left");
@@ -29,20 +27,19 @@ const dotsContainer = document.querySelector(".dots");
 const bannerImg = document.querySelector(".banner-img");
 const bannerText = document.querySelector("#banner p");
 
-// Ajout d'écouteurs d'événements pour les flèches de navigation
+// Ecouteurs d'événements pour les flèches de navigation
 leftArrow.addEventListener("click", () => {
-  console.log("Left arrow clicked");
-  updateSlide("previous"); // Affiche la diapositive précédente
+  //console.log("Left arrow clicked");
+  updateSlide("previous");
 });
 
 rightArrow.addEventListener("click", () => {
-  console.log("Right arrow clicked");
-  updateSlide("next"); // Affiche la diapositive suivante
+  //console.log("Right arrow clicked");
+  updateSlide("next");
 });
 
 // Fonction pour mettre à jour la diapositive affichée
 function updateSlide(action) {
-  // Mise à jour de currentIndex selon l'action ("previous" ou "next")
   if (action === "previous") {
     if (currentIndex > 0) {
       currentIndex--;
@@ -58,10 +55,8 @@ function updateSlide(action) {
   }
   // Récupère la diapositive actuelle
   const currentSlide = slides[currentIndex];
-  // Met à jour l'image et le texte de la bannière
   bannerImg.src = `./assets/images/slideshow/${currentSlide.image}`;
   bannerText.innerHTML = currentSlide.tagLine;
-  // Met à jour les points de navigation
   updateDots();
 }
 
@@ -71,10 +66,8 @@ function createDots() {
     const dot = document.createElement("div");
     dot.classList.add("dot");
     if (index === currentIndex) {
-      // Ajoute la classe 'dot_selected' au point correspondant à la diapositive actuelle
       dot.classList.add("dot_selected");
     }
-    // Ajoute le point à son conteneur
     dotsContainer.appendChild(dot);
   }
 }
@@ -84,14 +77,11 @@ function updateDots() {
   const dots = dotsContainer.querySelectorAll(".dot");
   dots.forEach((dot, index) => {
     if (index === currentIndex) {
-      // Sélectionne le point correspondant à la diapositive actuelle
       dot.classList.add("dot_selected");
     } else {
-      // Désélectionne les autres points
       dot.classList.remove("dot_selected");
     }
   });
 }
 
-// Crée les points de navigation au chargement de la page
 createDots();
